@@ -25,4 +25,5 @@ public class TransactionController extends GenericController<Transaction, Transa
 	protected GenericService<Transaction, TransactionDto, String> service() {
 		return this.transactionService;
 	}
+
 }
