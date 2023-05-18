@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface CheckoutRepository extends ReactiveMongoRepository<Checkout, String> {
-	Mono<Integer> countAllByPlaceIdAndActiveIsTrueAndCheckoutDateGreaterThan(Long placeId, LocalDateTime currentDate);
+	Mono<Long> countAllByPlaceIdAndActiveIsTrueAndCheckoutDateGreaterThan(String placeId, LocalDateTime currentDate);
 }

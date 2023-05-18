@@ -35,8 +35,8 @@ public class CheckoutService {
 		this.webClientBuilder = webClientBuilder;
 	}
 
-	public Mono<CheckoutDto> checkAvailability(Long placeId) {
-		String adminUri = "http://" + ADMIN_SERVER_URL + "/admin/place/" + placeId;
+	public Mono<CheckoutDto> checkAvailability(String placeId) {
+		String adminUri = "http://" + ADMIN_SERVER_URL + "/place/" + placeId;
 		return webClientBuilder
 				.build()
 				.get()
@@ -47,13 +47,15 @@ public class CheckoutService {
 				.map(PlaceDto::maxNumberOfGuests)
 				.flatMap(maxNumberOfGuests ->
 					this.checkoutRepository.countAllByPlaceIdAndActiveIsTrueAndCheckoutDateGreaterThan(placeId, LocalDateTime.now())
-							.map(currentGuests -> new CheckoutDto(maxNumberOfGuests, currentGuests))
+							.map(currentGuests -> new CheckoutDto(maxNumberOfGuests,
+									Math.toIntExact(currentGuests)))
+							.switchIfEmpty(Mono.error(new EntityNotFoundException("aaaaaaaa")))
 
 				);
 	}
 
-	public Mono<TransactionDto> bookLocation(Long placeId, BookDto bookDto) {
-		String performPaymentUri = "http://" + PAYMENT_SERVER_URL + "/payment/transaction/pay";
+	public Mono<TransactionDto> bookLocation(String placeId, BookDto bookDto) {
+		String performPaymentUri = "http://" + PAYMENT_SERVER_URL + "/transaction/pay";
 
 		return this.checkAvailability(placeId)
 				.flatMap(c -> {

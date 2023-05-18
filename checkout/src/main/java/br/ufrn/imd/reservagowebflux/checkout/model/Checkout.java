@@ -13,9 +13,9 @@ public class Checkout extends GenericModel<String> {
     private String id;
     private LocalDateTime checkoutDate;
 
-    private Long userId;
+    private String userId;
 
-    private Long placeId;
+    private String placeId;
 
 
     @Override
@@ -36,19 +36,19 @@ public class Checkout extends GenericModel<String> {
         this.checkoutDate = expirationDate;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public Long getPlaceId() {
+    public String getPlaceId() {
         return placeId;
     }
 
-    public void setPlaceId(Long placeId) {
+    public void setPlaceId(String placeId) {
         this.placeId = placeId;
     }
 }

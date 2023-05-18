@@ -25,12 +25,12 @@ public class CheckoutController {
 	}
 
 	@GetMapping({"/verify/{id}"})
-	public Mono<CheckoutDto> checkAvailability(@PathVariable Long id) {
+	public Mono<CheckoutDto> checkAvailability(@PathVariable String id) {
 		return checkoutService.checkAvailability(id);
 	}
 
 	@PostMapping({"/book/{placeId}"})
-	public Mono<TransactionDto> bookLocation(@PathVariable Long placeId,
+	public Mono<TransactionDto> bookLocation(@PathVariable String placeId,
 			@RequestBody BookDto bookDto) {
 		return checkoutService.bookLocation(placeId, bookDto);
 	}
