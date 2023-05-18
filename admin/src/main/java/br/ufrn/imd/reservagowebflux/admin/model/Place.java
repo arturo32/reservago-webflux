@@ -4,9 +4,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "place")
-public class Place extends GenericModel {
+public class Place extends GenericModel<String> {
     @Id
-    private Long id;
+    private String id;
 
     private boolean available;
     private double stars;
@@ -16,8 +16,6 @@ public class Place extends GenericModel {
     private String description;
     private Integer daysAvailable;
 
-    @ManyToOne
-    @JoinColumn(name = "host_id")
     private User host;
     private Integer maxNumberOfGuests;
 
@@ -25,12 +23,12 @@ public class Place extends GenericModel {
     }
 
     @Override
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

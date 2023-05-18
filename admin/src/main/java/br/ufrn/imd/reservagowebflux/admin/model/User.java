@@ -1,29 +1,21 @@
 package br.ufrn.imd.reservagowebflux.admin.model;
 
-import br.ufrn.imd.reservagomvc.model.GenericModel;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="\"user\"")
-public class User extends GenericModel<Long> {
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "user")
+public class User extends GenericModel<String> {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    private Long id;
+    private String id;
     private String name;
     private Integer type;
 
     public User() {
     }
 
-    public User(Long id, String name, Integer type) {
+    public User(String id, String name, Integer type) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -35,12 +27,12 @@ public class User extends GenericModel<Long> {
     }
 
     @Override
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
