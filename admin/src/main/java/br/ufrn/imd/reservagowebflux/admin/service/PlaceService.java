@@ -1,7 +1,6 @@
 package br.ufrn.imd.reservagowebflux.admin.service;
 
 import br.ufrn.imd.reservagowebflux.admin.model.Place;
-import br.ufrn.imd.reservagowebflux.admin.model.User;
 import br.ufrn.imd.reservagowebflux.admin.model.dto.PlaceDto;
 import br.ufrn.imd.reservagowebflux.admin.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,8 @@ public class PlaceService extends GenericService<Place, PlaceDto, String> {
 	}
 
 	@Override
-	public PlaceDto convertToDto(Place entity) {
-		return new PlaceDto(entity);
+	public PlaceDto convertToDto(Place place) {
+		return new PlaceDto(place);
 	}
 
 	@Override

@@ -15,7 +15,6 @@ public class Place extends GenericModel<String> {
     private String location;
     private String description;
     private Integer daysAvailable;
-
     private User host;
     private Integer maxNumberOfGuests;
 

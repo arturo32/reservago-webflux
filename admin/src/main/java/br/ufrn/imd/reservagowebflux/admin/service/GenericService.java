@@ -1,5 +1,6 @@
 package br.ufrn.imd.reservagowebflux.admin.service;
 
+import br.ufrn.imd.reservagowebflux.admin.exception.EntityNotFoundException;
 import br.ufrn.imd.reservagowebflux.admin.model.GenericModel;
 import java.io.Serializable;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -15,8 +16,9 @@ public abstract class GenericService<T extends GenericModel<PK>, Dto,  PK extend
 				.flatMap(e -> this.repository().save(e));
 	}
 
-	public Mono<T> findById(PK placeId) {
-		return this.repository().findById(placeId);
+	public Mono<T> findById(PK id) {
+		return this.repository().findById(id)
+				.switchIfEmpty(Mono.error(new EntityNotFoundException("Entity of id " + id + " not found.")));
 	}
 
 	public Flux<T> findAll() {
