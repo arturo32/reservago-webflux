@@ -1,4 +1,4 @@
-package br.ufrn.imd.reservagowebflux.admin.model;
+package br.ufrn.imd.reservagowebflux.base.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

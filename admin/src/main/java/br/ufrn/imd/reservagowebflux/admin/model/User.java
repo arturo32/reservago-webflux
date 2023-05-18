@@ -1,7 +1,7 @@
 package br.ufrn.imd.reservagowebflux.admin.model;
 
 
-
+import br.ufrn.imd.reservagowebflux.base.model.GenericModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -1,7 +1,7 @@
-package br.ufrn.imd.reservagowebflux.admin.service;
+package br.ufrn.imd.reservagowebflux.base.service;
 
-import br.ufrn.imd.reservagowebflux.admin.exception.EntityNotFoundException;
-import br.ufrn.imd.reservagowebflux.admin.model.GenericModel;
+import br.ufrn.imd.reservagowebflux.base.exception.EntityNotFoundException;
+import br.ufrn.imd.reservagowebflux.base.model.GenericModel;
 import java.io.Serializable;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;

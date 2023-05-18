@@ -1,11 +1,10 @@
-package br.ufrn.imd.reservagowebflux.admin.controller;
+package br.ufrn.imd.reservagowebflux.base.controller;
 
-import br.ufrn.imd.reservagowebflux.admin.exception.EntityNotFoundException;
-import br.ufrn.imd.reservagowebflux.admin.model.GenericModel;
-import br.ufrn.imd.reservagowebflux.admin.service.GenericService;
+import br.ufrn.imd.reservagowebflux.base.exception.EntityNotFoundException;
+import br.ufrn.imd.reservagowebflux.base.model.GenericModel;
+import br.ufrn.imd.reservagowebflux.base.service.GenericService;
 import jakarta.validation.Valid;
 import java.io.Serializable;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

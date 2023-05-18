@@ -2,8 +2,9 @@ package br.ufrn.imd.reservagowebflux.admin.controller;
 
 import br.ufrn.imd.reservagowebflux.admin.model.Place;
 import br.ufrn.imd.reservagowebflux.admin.model.dto.PlaceDto;
-import br.ufrn.imd.reservagowebflux.admin.service.GenericService;
 import br.ufrn.imd.reservagowebflux.admin.service.PlaceService;
+import br.ufrn.imd.reservagowebflux.base.controller.GenericController;
+import br.ufrn.imd.reservagowebflux.base.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

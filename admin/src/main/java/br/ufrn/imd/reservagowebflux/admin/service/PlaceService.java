@@ -3,6 +3,7 @@ package br.ufrn.imd.reservagowebflux.admin.service;
 import br.ufrn.imd.reservagowebflux.admin.model.Place;
 import br.ufrn.imd.reservagowebflux.admin.model.dto.PlaceDto;
 import br.ufrn.imd.reservagowebflux.admin.repository.PlaceRepository;
+import br.ufrn.imd.reservagowebflux.base.service.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Service;
