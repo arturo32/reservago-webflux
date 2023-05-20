@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class TransactionService extends GenericService<Transaction, TransactionDto, String> {
@@ -38,7 +39,8 @@ public class TransactionService extends GenericService<Transaction, TransactionD
 					transaction.setPlaceId(dto.placeId());
 					transaction.setUserId(dto.userId());
 					return transaction;
-				});
+				})
+				.subscribeOn(Schedulers.boundedElastic());
 	}
 
 	public Mono<Transaction> performPayment(PaymentDto paymentDto) {

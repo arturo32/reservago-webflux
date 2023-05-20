@@ -1,0 +1,4 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Sent KB/sec
+Verificar Localidade por ID,500,417,426,706,748,862,46,1009,0.000%,90.13881,11.80,19.63
+Realizar aluguel de Localidade,500,482,481,773,836,961,61,1071,0.000%,89.15835,15.41,41.53
+TOTAL,1000,450,448,741,812,933,46,1071,0.000%,176.83466,26.85,60.44

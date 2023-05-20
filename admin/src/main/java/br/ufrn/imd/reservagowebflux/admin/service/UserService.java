@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class UserService extends GenericService<User, UserDto, String> {
@@ -39,7 +40,8 @@ public class UserService extends GenericService<User, UserDto, String> {
 					user.setName(dto.name());
 					user.setType(dto.type());
 					return user;
-				});
+				})
+				.subscribeOn(Schedulers.boundedElastic());
 	}
 
 

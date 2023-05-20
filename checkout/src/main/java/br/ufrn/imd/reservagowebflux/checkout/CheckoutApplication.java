@@ -16,10 +16,10 @@ public class CheckoutApplication {
 		SpringApplication.run(CheckoutApplication.class, args);
 	}
 
-	@Bean
-	@LoadBalanced
-	public WebClient.Builder loadBalancedWebClientBuilder() {
-		return WebClient.builder();
-	}
+//	@Bean
+//	@LoadBalanced
+//	public WebClient.Builder loadBalancedWebClientBuilder() {
+//		return WebClient.builder();
+//	}
 
 }

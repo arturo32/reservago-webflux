@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.Builder;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class CheckoutService {
@@ -51,7 +52,8 @@ public class CheckoutService {
 									Math.toIntExact(currentGuests)))
 							.switchIfEmpty(Mono.error(new EntityNotFoundException("aaaaaaaa")))
 
-				);
+				)
+				.subscribeOn(Schedulers.boundedElastic());
 	}
 
 	public Mono<TransactionDto> bookLocation(String placeId, BookDto bookDto) {
@@ -80,7 +82,12 @@ public class CheckoutService {
 							.onStatus(status -> status != HttpStatus.OK, e -> Mono.error(new EntityNotFoundException("teste")))
 							.bodyToMono(TransactionDto.class)
 
-				);
+				)
+				.subscribeOn(Schedulers.boundedElastic());
+	}
+
+	public Mono<Void> deleteAll(){
+		return this.checkoutRepository.deleteAll();
 	}
 
 
