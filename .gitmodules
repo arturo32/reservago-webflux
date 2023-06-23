@@ -1,0 +1,3 @@
+[submodule "reservago-config-repo"]
+	path = reservago-config-repo
+	url = https://github.com/erneani/reservago-config-repo

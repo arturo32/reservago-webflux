@@ -1,0 +1,26 @@
+server:
+  port: 8101
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: payment
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: reservago-payment
+
+springdoc:
+  swagger-ui:
+    path: /swagger-doc/payment
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  service-url:
+    defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true

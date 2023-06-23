@@ -1,0 +1,18 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/erneani/reservago-config-repo.git
+          search-paths: '{application}/{profile}'
+          password: notausualpassword
+          username: reservagochef
+  security:
+    user:
+      name: root
+      password: root
