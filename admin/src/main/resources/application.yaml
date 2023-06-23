@@ -1,0 +1,9 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: admin
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8888
