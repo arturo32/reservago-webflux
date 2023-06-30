@@ -54,18 +54,6 @@ public class PlaceService extends GenericService<Place, PlaceDto, String> {
 	}
 
 	@Override
-	public Flux<Place> findAll() {
-		return this.repository().findAll().subscribeOn(Schedulers.boundedElastic());
-	}
-
-	@Override
-	public Mono<Place> save(PlaceDto dto) {
-		return this.convertToEntity(Mono.just(dto)).flatMap((e) -> {
-			return this.repository().save(e);
-		}).subscribeOn(Schedulers.boundedElastic());
-	}
-
-	@Override
 	public Mono<Place> findById(String id) {
 		return this.placeMap.get(id)
 				.switchIfEmpty(
