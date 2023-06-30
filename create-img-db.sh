@@ -1,2 +1,3 @@
 #!/bin/bash
-sudo docker image build -t reservago-webflux-db .
+sudo docker build -t reservago-webflux-db --target db-img .
+sudo docker build -t reservago-webflux-redis --target redis-img .
