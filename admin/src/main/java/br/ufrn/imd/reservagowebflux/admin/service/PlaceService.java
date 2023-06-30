@@ -1,10 +1,16 @@
 package br.ufrn.imd.reservagowebflux.admin.service;
 
+import static org.redisson.api.LocalCachedMapOptions.defaults;
+
 import br.ufrn.imd.reservagowebflux.admin.model.Place;
 import br.ufrn.imd.reservagowebflux.admin.model.dto.PlaceDto;
 import br.ufrn.imd.reservagowebflux.admin.repository.PlaceRepository;
 import br.ufrn.imd.reservagowebflux.base.exception.EntityNotFoundException;
 import br.ufrn.imd.reservagowebflux.base.service.GenericService;
+import org.redisson.api.LocalCachedMapOptions;
+import org.redisson.api.LocalCachedMapOptions.ReconnectionStrategy;
+import org.redisson.api.LocalCachedMapOptions.SyncStrategy;
+import org.redisson.api.RLocalCachedMapReactive;
 import org.redisson.api.RMapReactive;
 import org.redisson.api.RedissonReactiveClient;
 import org.redisson.codec.TypedJsonJacksonCodec;
@@ -23,13 +29,19 @@ public class PlaceService extends GenericService<Place, PlaceDto, String> {
 	private final PlaceRepository placeRepository;
 	private final UserService userService;
 
-	private RMapReactive<String, Place> placeMap;
+//	private RMapReactive<String, Place> placeMap;
+
+	private RLocalCachedMapReactive<String, Place> placeMap;
 
 	@Autowired
 	public PlaceService(PlaceRepository placeRepository, UserService userService, RedissonReactiveClient cacheser) {
 		this.placeRepository = placeRepository;
 		this.userService = userService;
-		this.placeMap = cacheser.getMap("/place/", new TypedJsonJacksonCodec(String.class, Place.class));
+		LocalCachedMapOptions<String, Place> mapOptions = LocalCachedMapOptions.<String, Place>defaults()
+				.syncStrategy(SyncStrategy.UPDATE) // If data changes, redis update the local cache of others services
+				.reconnectionStrategy(ReconnectionStrategy.CLEAR); // If connection fails, local cache is cleaned after reconnection
+		this.placeMap = cacheser.getLocalCachedMap("/place/", new TypedJsonJacksonCodec(String.class, Place.class), mapOptions);
+//		this.placeMap = cacheser.getMap("/place/", new TypedJsonJacksonCodec(String.class, Place.class));
 	}
 	@Override
 	protected ReactiveMongoRepository<Place, String> repository() {
