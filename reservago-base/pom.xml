@@ -11,6 +11,7 @@
 	<groupId>br.ufrn.imd.reservagowebflux.base</groupId>
 	<artifactId>reservago-base</artifactId>
 	<version>1.0</version>
+  <packaging>jar</packaging>
 	<name>reservago-base</name>
 	<description>Base library for reservago-webflux project</description>
 	<properties>
@@ -46,6 +47,7 @@
 	</dependencies>
 
 	<build>
+    <finalName>reservago-base</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

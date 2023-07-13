@@ -4,26 +4,19 @@ FROM reservago-wf-base:1.0 as build
 
 #ENV PROFILE ${PROFILE}
 
-COPY . /admin
+COPY . /base
+
+WORKDIR /base
+
+RUN mvn clean package -DskipTests
+# -Dspring.profiles.active=${PROFILE}
+
+FROM openjdk:20-jdk-slim
 
 WORKDIR /admin
 
-RUN mvn clean package
-# -Dspring.profiles.active=${PROFILE}
+COPY --from=build /base/target/*.jar /target
 
-FROM tomcat:9.0.36-jdk11-openjdk-slim
+COPY target/*.jar admin.jar
 
-COPY --from=build /signuplam/target/signuplam.war /usr/local/tomcat/webapps
-
-EXPOSE 8080
-
-
-
-
-
-
-
-FROM mongodb/mongodb-community-server:5.0-ubi8 as db-img
-
-FROM redis:alpine3.18 as redis-img
-
+ENTRYPOINT ["java","-jar","/admin.jar"]
