@@ -11,6 +11,7 @@
 	<groupId>br.ufrn.imd.reservagowebflux</groupId>
 	<artifactId>admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
 	<name>admin</name>
 	<description>ReservaGO resources storage and administration</description>
 	<properties>
