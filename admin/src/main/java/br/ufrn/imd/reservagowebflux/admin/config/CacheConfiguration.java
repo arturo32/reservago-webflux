@@ -11,11 +11,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class CacheConfiguration {
-//	@Bean
-//	public CacheManager cacheManager(RedissonClient redissonClient) {
-//		return new RedissonSpringCacheManager(redissonClient);
-//	}
-
 	@Bean
 	public RedissonReactiveClient getClient() {
 		Config config = new Config();

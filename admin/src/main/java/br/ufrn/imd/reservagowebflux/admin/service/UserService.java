@@ -1,6 +1,5 @@
 package br.ufrn.imd.reservagowebflux.admin.service;
 
-import br.ufrn.imd.reservagowebflux.admin.model.Place;
 import br.ufrn.imd.reservagowebflux.admin.model.User;
 import br.ufrn.imd.reservagowebflux.admin.model.dto.UserDto;
 import br.ufrn.imd.reservagowebflux.admin.repository.UserRepository;

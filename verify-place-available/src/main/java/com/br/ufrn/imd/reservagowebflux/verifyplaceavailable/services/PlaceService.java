@@ -1,9 +1,10 @@
-package com.br.ufrn.imd.reservagowebflux.processplacecreation.services;
+package com.br.ufrn.imd.reservagowebflux.verifyplaceavailable.services;
+
 
 import br.ufrn.imd.reservagowebflux.base.service.GenericService;
-import com.br.ufrn.imd.reservagowebflux.processplacecreation.models.Place;
-import com.br.ufrn.imd.reservagowebflux.processplacecreation.models.dto.PlaceDto;
-import com.br.ufrn.imd.reservagowebflux.processplacecreation.repositories.PlaceRepository;
+import com.br.ufrn.imd.reservagowebflux.verifyplaceavailable.models.Place;
+import com.br.ufrn.imd.reservagowebflux.verifyplaceavailable.models.dto.PlaceDto;
+import com.br.ufrn.imd.reservagowebflux.verifyplaceavailable.repositories.PlaceRepository;
 import org.redisson.api.LocalCachedMapOptions;
 import org.redisson.api.RLocalCachedMapReactive;
 import org.redisson.api.RedissonReactiveClient;
@@ -32,6 +33,12 @@ public class PlaceService extends GenericService<Place, PlaceDto, String> {
 	@Override
 	protected ReactiveMongoRepository<Place, String> repository() {
 		return this.placeRepository;
+	}
+
+	public Mono<Boolean> checkPlaceAvailability(String placeId) {
+		return this.placeRepository
+				.findById(placeId)
+				.map(Place::isAvailable);
 	}
 
 	@Override

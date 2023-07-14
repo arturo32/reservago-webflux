@@ -1,10 +1,9 @@
-package com.br.ufrn.imd.reservagowebflux.processplacecreation.models;
+package com.br.ufrn.imd.reservagowebflux.verifyplaceavailable.models;
+
 
 import br.ufrn.imd.reservagowebflux.base.model.GenericModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.UUID;
 
 @Document(collection = "place")
 public class Place extends GenericModel<String> {
@@ -25,7 +24,6 @@ public class Place extends GenericModel<String> {
     }
 
     public Place(boolean available, double stars, double valuePerDay, String name, String location, String description, Integer daysAvailable, String hostId, Integer maxNumberOfGuests) {
-        this.id = UUID.randomUUID().toString();
         this.available = available;
         this.stars = stars;
         this.valuePerDay = valuePerDay;
