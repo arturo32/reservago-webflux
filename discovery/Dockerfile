@@ -1,4 +1,15 @@
-FROM mongodb/mongodb-community-server:5.0-ubi8 as db-img
+FROM maven:3.9.3-eclipse-temurin-20-alpine as build
+COPY . /home/discovery
 
-FROM redis:alpine3.18 as redis-img
+WORKDIR /home/discovery
 
+RUN mvn clean package -DskipTests
+#-Dspring.profiles.active=${PROFILE}
+
+FROM openjdk:20-jdk-slim
+
+WORKDIR /home/discovery
+
+COPY --from=build /home/discovery/target/*jar app.jar
+
+ENTRYPOINT ["java","-jar","/home/discovery/app.jar"]

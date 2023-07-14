@@ -1,7 +1,5 @@
 FROM reservago-wf-base:1.0 as build
 
-
-
 FROM maven:3.9.3-eclipse-temurin-20-alpine as build2
 COPY . /home/admin
 
