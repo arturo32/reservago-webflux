@@ -1,6 +1,7 @@
 package br.ufrn.imd.reservagowebflux.checkout.service;
 
 import br.ufrn.imd.reservagowebflux.base.exception.EntityNotFoundException;
+import br.ufrn.imd.reservagowebflux.checkout.exception.ServiceNotRespondingException;
 import br.ufrn.imd.reservagowebflux.checkout.model.Checkout;
 import br.ufrn.imd.reservagowebflux.checkout.model.dto.BookDto;
 import br.ufrn.imd.reservagowebflux.checkout.model.dto.CheckoutDto;
@@ -17,6 +18,8 @@ import org.redisson.api.RedissonReactiveClient;
 import org.redisson.codec.TypedJsonJacksonCodec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.ReactiveCircuitBreakerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -34,6 +37,8 @@ public class CheckoutService {
 
 	private RLocalCachedMapReactive<String, CheckoutDto> placeMap;
 
+	private ReactiveCircuitBreakerFactory reactiveCircuitBreakerFactory;
+
 	@Value("${admin.server.name}")
 	private String ADMIN_SERVER_URL;
 
@@ -41,7 +46,8 @@ public class CheckoutService {
 	private String PAYMENT_SERVER_URL;
 
 	@Autowired
-	public CheckoutService(CheckoutRepository checkoutRepository, Builder webClientBuilder, RedissonReactiveClient cacheser) {
+	public CheckoutService(CheckoutRepository checkoutRepository, Builder webClientBuilder, RedissonReactiveClient cacheser, ReactiveCircuitBreakerFactory reactiveCircuitBreakerFactory) {
+		this.reactiveCircuitBreakerFactory = reactiveCircuitBreakerFactory;
 		this.checkoutRepository = checkoutRepository;
 		this.webClientBuilder = webClientBuilder;
 		LocalCachedMapOptions<String, Checkout> checkoutMapOptions = LocalCachedMapOptions.<String, Checkout>defaults()
@@ -67,7 +73,8 @@ public class CheckoutService {
 
 	public Mono<CheckoutDto> checkAvailability(String placeId) {
 		String adminUri = "http://" + ADMIN_SERVER_URL + "/place/" + placeId;
-		return this.placeMap.get(placeId)
+		Mono<CheckoutDto> check =
+				this.placeMap.get(placeId)
 				.switchIfEmpty(
 
 					webClientBuilder
@@ -89,6 +96,9 @@ public class CheckoutService {
 
 					)
 				.subscribeOn(Schedulers.boundedElastic());
+
+		return this.reactiveCircuitBreakerFactory.create("placeBreaker").run(check, throwable -> Mono.error(new ServiceNotRespondingException("Please, wait a minute while "
+				+ "our services come back to life!")));
 	}
 
 

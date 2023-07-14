@@ -83,6 +83,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-all</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+
 	</dependencies>
 
 

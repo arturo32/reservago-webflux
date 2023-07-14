@@ -12,7 +12,6 @@ RUN mvn -Dmaven.repo.local=/root/.m2/repository clean package -DskipTests
 #-Dspring.profiles.active=${PROFILE}
 
 
-
 FROM openjdk:20-jdk-slim
 
 WORKDIR /home/admin
