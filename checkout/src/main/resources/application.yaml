@@ -13,10 +13,13 @@ resilience4j.circuitbreaker:
       slidingWindowSize: 10
       permittedNumberOfCallsInHalfOpenState: 3
       slidingWindowType: TIME_BASED
+      wait-duration-in-open-state: 1ms
+      failure-rate-threshold: 50
 
-resilience4j.timelimiter:
-  configs:
-    default:
-      timeoutDuration: 5s
-      cancelRunningFuture: true
+
+#resilience4j.timelimiter:
+#  configs:
+#    default:
+#      timeoutDuration: 5ms
+#      cancelRunningFuture: true
 
