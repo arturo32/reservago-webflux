@@ -32,7 +32,7 @@ echo "Creating image of reservago-wf-admin..."
 cd ../admin
 sudo docker build --tag reservago-wf-admin:1.0 .
 echo "Running container of reservago-wf-admin..."
-sudo docker run -d --name reservago-wf-admin --network host reservago-wf-admin:1.0
+sudo docker run -d --name reservago-wf-admin --network="host" reservago-wf-admin:1.0
 
 
 cd ..
