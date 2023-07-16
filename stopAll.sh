@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker container start $(sudo docker container ls -a -q)
+sudo docker container stop $(sudo docker ps -q)

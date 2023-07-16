@@ -82,7 +82,8 @@ public class CheckoutService {
 					.get()
 					.uri(adminUri)
 					.retrieve()
-					.onStatus(status -> status != HttpStatus.OK, e -> Mono.error(new EntityNotFoundException("teste")))
+					.onStatus(status -> status != HttpStatus.OK, e ->
+							Mono.error(new EntityNotFoundException("Place ID does not exist!")))
 					.bodyToMono(PlaceDto.class)
 					.map(PlaceDto::maxNumberOfGuests)
 					.flatMap(maxNumberOfGuests ->
@@ -97,7 +98,8 @@ public class CheckoutService {
 					)
 				.subscribeOn(Schedulers.boundedElastic());
 
-		return this.reactiveCircuitBreakerFactory.create("placeBreaker").run(check, throwable -> Mono.error(new ServiceNotRespondingException("Please, wait a minute while "
+		return this.reactiveCircuitBreakerFactory.create("placeBreaker").run(check,
+				throwable -> Mono.error(new ServiceNotRespondingException("Please, wait a minute while "
 				+ "our services come back to life!")));
 	}
 
