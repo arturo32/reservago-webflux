@@ -14,7 +14,7 @@ resilience4j:
         slidingWindowSize: 10  #How much time requests remain in buffer (seconds)
         permittedNumberOfCallsInHalfOpenState: 3
         slidingWindowType: TIME_BASED
-        minimum-number-of-calls: 20
+        minimum-number-of-calls: 5
         wait-duration-in-open-state: 10s
         failure-rate-threshold: 30
         event-consumer-buffer-size: 10
@@ -23,7 +23,7 @@ resilience4j:
   timelimiter:
     configs:
       default:
-        timeoutDuration: 500ms
+        timeoutDuration: 100ms
         cancelRunningFuture: true
 #  retry:
 #    configs:
