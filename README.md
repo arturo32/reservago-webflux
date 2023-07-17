@@ -30,12 +30,12 @@ If you have Docker, all you need to do is to run the following bash script:
 ./runAll.sh
 ```
 
-If you want to stop all the containers, you type:
+If you want to stop **all the containers of your computer**, you type:
 ```
 ./stopAll.sh
 ```
 
-If you want to restart all stopped containers, you run:
+If you want to restart all **stopped containers of your computer**, you run:
 ```
 ./startAll.sh
 ```
